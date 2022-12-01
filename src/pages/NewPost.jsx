@@ -33,6 +33,7 @@ function NewPostPage() {
 
 export default NewPostPage;
 
+//
 export async function action({ request }) {
   const data = await request.formData();
 

@@ -6,16 +6,18 @@ import { getSlowPosts } from '../util/api';
 
 function DeferredBlogPostsPage() {
   const loaderData = useLoaderData();
+  // console.log('loaderData', loaderData);
 
   return (
     <>
       <h1>Our Blog Posts</h1>
       <Suspense fallback={<p>Loading...</p>}>
+        {/* Await manages the deferred data (promise) */}
         <Await
           resolve={loaderData.posts}
           errorElement={<p>Error loading blog posts.</p>}
         >
-          {(loadedPosts) => <Posts blogPosts={loadedPosts} />}
+          {(posts) => <Posts blogPosts={posts} />}
         </Await>
       </Suspense>
     </>
@@ -25,5 +27,6 @@ function DeferredBlogPostsPage() {
 export default DeferredBlogPostsPage;
 
 export async function deferredBlogPostsLoader() {
+  // defer enables suspense for the un-awaited promises
   return defer({ posts: getSlowPosts() });
 }

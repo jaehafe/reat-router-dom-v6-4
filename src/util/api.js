@@ -42,5 +42,4 @@ export async function savePost(data) {
   if (!response.ok) {
     throw response;
   }
-  
 }
